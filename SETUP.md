@@ -4,14 +4,14 @@ Everything needed to get the project running again from a clean clone.
 
 ## 1. Prerequisites to install
 
-| Tool                            | Check with         | Install                           |
-| ------------------------------- | ------------------ | --------------------------------- |
-| Git                             | `git --version`    | https://git-scm.com               |
-| Python 3.11+                    | `python --version` | https://python.org                |
-| Node.js 20+                     | `node --version`   | https://nodejs.org                |
-| pnpm                            | `pnpm --version`   | `npm install -g pnpm`             |
-| FFmpeg                          | `ffmpeg -version`  | `winget install ffmpeg` (Windows) |
-| GitHub CLI (optional, for auth) | `gh --version`     | `winget install --id GitHub.cli`  |
+| Tool | Check with | Install |
+|---|---|---|
+| Git | `git --version` | https://git-scm.com |
+| Python 3.11+ | `python --version` | https://python.org |
+| Node.js 20+ | `node --version` | https://nodejs.org |
+| pnpm | `pnpm --version` | `npm install -g pnpm` |
+| FFmpeg | `ffmpeg -version` | `winget install ffmpeg` (Windows) |
+| GitHub CLI (optional, for auth) | `gh --version` | `winget install --id GitHub.cli` |
 
 ## 2. Clone the repo
 
@@ -30,7 +30,6 @@ notepad .env
 ```
 
 Paste in (replace with your real values):
-
 ```
 GROQ_API_KEY=your_groq_key_here
 R2_ACCOUNT_ID=your_r2_account_id
@@ -42,12 +41,10 @@ R2_BUCKET_NAME=zatoona-media
 (`GEMINI_API_KEY` only needed if you ever rerun the model-comparison test — safe to leave out.)
 
 Also create the frontend's env file:
-
 ```powershell
 cd ..\..\apps\web
 copy .env.local.example .env.local
 ```
-
 (Default value `http://localhost:8000` is fine unless you change where the backend runs.)
 
 ## 4. Install backend dependencies
@@ -69,7 +66,6 @@ pnpm install
 ```powershell
 dir ..\..\packages\prompts\arabic\quran.json
 ```
-
 This should already be there from the clone (assuming it was committed, not gitignored as a media/binary file). If it's missing, you'll need to re-save it at that exact path — `pipeline/quran_reference.py` depends on it.
 
 ## 7. Smoke-test the pieces that talk to external services
@@ -99,14 +95,12 @@ This is the fastest way to confirm everything (transcription, refinement, Quran 
 ## 9. Run the real app (two terminals)
 
 **Terminal 1 — backend:**
-
 ```powershell
 cd apps\worker
 uvicorn app.main:app --reload
 ```
 
 **Terminal 2 — frontend:**
-
 ```powershell
 cd apps\web
 pnpm dev
@@ -116,19 +110,18 @@ Open **http://localhost:3000**.
 
 ## 10. Quick reference: what each test script does
 
-| Script                          | Tests                                                           |
-| ------------------------------- | --------------------------------------------------------------- |
-| `test_whisper_arabic.py`        | Arabic transcription via Groq Whisper (chunking for long files) |
-| `test_r2_upload.py`             | Presigned upload/download to Cloudflare R2                      |
-| `test_ffmpeg_split_screen.py`   | Face detection + auto single/split-screen reframing             |
-| `test_arabic_captions.py`       | RTL Arabic caption burn-in                                      |
-| `run_refine_transcript_test.py` | Transcript correction + Quran/Hadith/Quote classification       |
-| `test_quran_reference.py`       | Quran verse matching accuracy (15 test cases)                   |
-| `test_yt_dlp_ingest.py`         | YouTube video downloading                                       |
-| `run_pipeline_test.py`          | The whole pipeline, end to end, no server needed                |
+| Script | Tests |
+|---|---|
+| `test_whisper_arabic.py` | Arabic transcription via Groq Whisper (chunking for long files) |
+| `test_r2_upload.py` | Presigned upload/download to Cloudflare R2 |
+| `test_ffmpeg_split_screen.py` | Face detection + auto single/split-screen reframing |
+| `test_arabic_captions.py` | RTL Arabic caption burn-in |
+| `run_refine_transcript_test.py` | Transcript correction + Quran/Hadith/Quote classification |
+| `test_quran_reference.py` | Quran verse matching accuracy (15 test cases) |
+| `test_yt_dlp_ingest.py` | YouTube video downloading |
+| `run_pipeline_test.py` | The whole pipeline, end to end, no server needed |
 
 ## Known open items (not bugs — just not built yet)
-
 - Job storage is in-memory (`core/jobs.py`) — lost on server restart. Fine for testing, needs Supabase before real users.
 - No user accounts/auth yet.
 - No payments yet.

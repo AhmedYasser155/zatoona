@@ -1,7 +1,8 @@
 # خُلاصة (Khulasa) — Arabic-First AI Video Clipping Platform
+
 ## Full Business & Technical Plan
 
-*A budget-first, scalable alternative to OpusClip / Vizard / Ssemble, built for Arabic creators and the MENA market.*
+_A budget-first, scalable alternative to OpusClip / Vizard / Ssemble, built for Arabic creators and the MENA market._
 
 ---
 
@@ -12,6 +13,7 @@ Arabic-speaking creators, podcasters, preachers, coaches, and businesses across 
 The plan below is for **"Khulasa"** (placeholder name — meaning "summary/essence" in Arabic; rename freely), an Arabic-first version of the same product category: upload a long video (podcast, stream, lecture, interview) → AI finds the best moments → auto-generates vertical clips with burned-in Arabic captions, auto-reframing, hook titles, and one-click scheduling.
 
 **Core strategy:**
+
 - **MVP on nearly-free infrastructure** — open-source models + generous free tiers (Groq, Cloudflare, Supabase) to get to market for near-$0 fixed cost.
 - **Arabic-first, not Arabic-added** — dialect handling (Egyptian, Gulf, Levantine, MSA), correct RTL caption rendering, and culturally-aware content review baked into the product from day one, not bolted on.
 - **Modular architecture** — every AI step (transcription, scoring, rendering) is an independently swappable service, so you can start on free/cheap providers and swap in paid, higher-throughput, or self-hosted versions as volume grows, without a rewrite.
@@ -21,21 +23,23 @@ The plan below is for **"Khulasa"** (placeholder name — meaning "summary/essen
 ## 2. Market & Competitive Landscape
 
 ### 2.1 Why now
+
 - Short-form video consumption in MENA is high and rising, with Arabic podcast and long-form YouTube/Twitch content growing fast, but almost all repurposing tools optimize for English virality patterns and Latin-script captions.
 - Arabic script is cursive, right-to-left, and context-sensitive (letters change shape depending on position), which most caption engines and generic "auto-caption" pipelines get visibly wrong — this is a real, defensible product gap, not a cosmetic one.
 - Local payment rails (Fawry, Paymob, Vodafone Cash, MADA, STC Pay) are not supported by Stripe-only Western tools, creating real purchase friction for MENA solo creators.
 
 ### 2.2 Competitor snapshot
 
-| Product | Core loop | Pricing (2026) | Arabic support | Gap you can exploit |
-|---|---|---|---|---|
-| **OpusClip** | Long video → AI hook-picking (GPT-based) → clips + captions + scheduler | Free (60 min/mo, watermark); Starter $15/mo; Pro $29/mo; Business custom | Captions in 20+ languages, but hook-scoring and virality model tuned on English/Western content | Dialect-aware scoring, correct RTL caption styling, MENA payments |
-| **Vizard** | Similar clip pipeline, competitively priced | Creator plan around $14–15/mo | Multi-language captions, same English-centric scoring | Same as above, plus lower price point for MENA purchasing power |
-| **Ssemble** | Auto clipping, face-tracking, hook titles/CTAs generated via LLM, meme/game overlays, direct scheduling, has a public API | Free tier + Pro from ~$9.90/mo | No meaningful Arabic-specific tuning found | Same gap; also a lighter competitor to benchmark UX/API design against |
+| Product      | Core loop                                                                                                                 | Pricing (2026)                                                           | Arabic support                                                                                  | Gap you can exploit                                                    |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| **OpusClip** | Long video → AI hook-picking (GPT-based) → clips + captions + scheduler                                                   | Free (60 min/mo, watermark); Starter $15/mo; Pro $29/mo; Business custom | Captions in 20+ languages, but hook-scoring and virality model tuned on English/Western content | Dialect-aware scoring, correct RTL caption styling, MENA payments      |
+| **Vizard**   | Similar clip pipeline, competitively priced                                                                               | Creator plan around $14–15/mo                                            | Multi-language captions, same English-centric scoring                                           | Same as above, plus lower price point for MENA purchasing power        |
+| **Ssemble**  | Auto clipping, face-tracking, hook titles/CTAs generated via LLM, meme/game overlays, direct scheduling, has a public API | Free tier + Pro from ~$9.90/mo                                           | No meaningful Arabic-specific tuning found                                                      | Same gap; also a lighter competitor to benchmark UX/API design against |
 
-**Your wedge:** none of these treat Arabic as a first-class citizen. You don't need to out-build OpusClip's whole feature surface on day one — you need to be *visibly and measurably better at the Arabic-specific parts* (transcription accuracy, caption legibility, dialect-aware "best moment" picking, and MENA-friendly pricing/payments), then expand feature-for-feature over time.
+**Your wedge:** none of these treat Arabic as a first-class citizen. You don't need to out-build OpusClip's whole feature surface on day one — you need to be _visibly and measurably better at the Arabic-specific parts_ (transcription accuracy, caption legibility, dialect-aware "best moment" picking, and MENA-friendly pricing/payments), then expand feature-for-feature over time.
 
 ### 2.3 Positioning
+
 "The first AI clipping tool that actually understands Arabic — dialects, script, and culture — not just translated captions."
 
 ---
@@ -43,6 +47,7 @@ The plan below is for **"Khulasa"** (placeholder name — meaning "summary/essen
 ## 3. MVP Product Definition
 
 ### 3.1 Core user flow (v1)
+
 1. User pastes a YouTube link or uploads a video/audio file.
 2. Platform transcribes it in Arabic (with dialect auto-detection where feasible).
 3. An LLM scores segments for "hook strength" (strong opening line, emotional peak, controversial or highly quotable moment, joke, revelation) and proposes 5–10 clip candidates.
@@ -51,17 +56,17 @@ The plan below is for **"Khulasa"** (placeholder name — meaning "summary/essen
 
 ### 3.2 Feature scope by phase
 
-| Feature | MVP (Month 1–3) | Growth (Month 4–9) | Scale (Month 10+) |
-|---|---|---|---|
-| YouTube link / file ingestion | ✅ | ✅ | ✅ |
-| Arabic transcription | ✅ (Whisper large-v3, MSA + major dialects) | Fine-tuned dialect model | Custom Arabic ASR, real-time |
-| AI "best clip" scoring | ✅ (LLM prompt-based scoring) | Learned ranking model from user engagement data | Proprietary virality model |
-| Auto-reframe / face tracking | ✅ (OpenCV/MediaPipe based) | Multi-speaker active-speaker switching | GPU-accelerated real-time preview |
-| Arabic burned-in captions (RTL, correct shaping) | ✅ | Custom fonts, animated word highlight, Arabic-specific templates (Quranic/poetic style, meme style) | Full brand-kit template marketplace |
-| Hook titles / CTAs | ✅ (LLM-generated in Arabic dialect of choice) | A/B tested titles | Auto-optimized based on platform performance data |
-| Scheduling/publishing | Manual export only | Direct publish to TikTok/IG/YouTube via their APIs | Full social calendar, analytics loop-back |
-| Team/brand workspace | ❌ | Basic (shared workspace) | Full agency tooling |
-| Payments | Manual (bank transfer/Instapay) or simple Stripe | Paymob/Fawry integration | Full billing, usage-based invoicing |
+| Feature                                          | MVP (Month 1–3)                                  | Growth (Month 4–9)                                                                                  | Scale (Month 10+)                                 |
+| ------------------------------------------------ | ------------------------------------------------ | --------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
+| YouTube link / file ingestion                    | ✅                                               | ✅                                                                                                  | ✅                                                |
+| Arabic transcription                             | ✅ (Whisper large-v3, MSA + major dialects)      | Fine-tuned dialect model                                                                            | Custom Arabic ASR, real-time                      |
+| AI "best clip" scoring                           | ✅ (LLM prompt-based scoring)                    | Learned ranking model from user engagement data                                                     | Proprietary virality model                        |
+| Auto-reframe / face tracking                     | ✅ (OpenCV/MediaPipe based)                      | Multi-speaker active-speaker switching                                                              | GPU-accelerated real-time preview                 |
+| Arabic burned-in captions (RTL, correct shaping) | ✅                                               | Custom fonts, animated word highlight, Arabic-specific templates (Quranic/poetic style, meme style) | Full brand-kit template marketplace               |
+| Hook titles / CTAs                               | ✅ (LLM-generated in Arabic dialect of choice)   | A/B tested titles                                                                                   | Auto-optimized based on platform performance data |
+| Scheduling/publishing                            | Manual export only                               | Direct publish to TikTok/IG/YouTube via their APIs                                                  | Full social calendar, analytics loop-back         |
+| Team/brand workspace                             | ❌                                               | Basic (shared workspace)                                                                            | Full agency tooling                               |
+| Payments                                         | Manual (bank transfer/Instapay) or simple Stripe | Paymob/Fawry integration                                                                            | Full billing, usage-based invoicing               |
 
 ### 3.3 Arabic-first requirements (the actual differentiation — don't skip these)
 
@@ -77,24 +82,25 @@ The plan below is for **"Khulasa"** (placeholder name — meaning "summary/essen
 ## 4. Technical Architecture
 
 ### 4.1 Pipeline (see diagram above)
+
 Ingest → Transcribe (Arabic) → LLM hook scoring → Auto-reframe & cut → Burn-in Arabic captions → Export/publish. Every stage is a separately deployable service connected by a job queue, so you can swap any one piece (e.g., move transcription from Groq's free tier to a paid, higher-SLA provider) without touching the rest.
 
 ### 4.2 MVP stack — chosen for near-zero fixed cost
 
-| Layer | MVP choice | Why | Cost at low volume |
-|---|---|---|---|
-| Frontend | Next.js (App Router) + Tailwind, RTL-first layout | Free hosting on Vercel/Netlify free tier, huge ecosystem, easy RTL support | $0 |
-| Auth + DB + object storage | Supabase (Postgres + Auth + Storage) | One free tier covers all three; generous limits for MVP | $0 (free tier) |
-| Video/audio object storage (large files) | Cloudflare R2 | 10GB free, no egress fees (huge saving vs. S3) | $0–5/mo |
-| Speech-to-text (Arabic) | Groq-hosted Whisper large-v3 (or Turbo) | Free tier: ~2,000 requests/day; paid tier ~$0.04/hour of audio if you outgrow free tier — dramatically cheaper than OpenAI's own Whisper endpoint | ~$0 to start |
-| LLM (hook scoring, titles, captions polish) | Groq (Llama models, free tier) or a cheap provider (e.g., DeepSeek/Gemini Flash tier) for the heavier reasoning steps | Free/very cheap tiers with generous daily quotas | ~$0–20/mo |
-| Video processing (cut, crop, encode) | FFmpeg (self-run in a worker) | Free, open source, industry standard | $0 (compute only) |
-| Face tracking / auto-reframe | OpenCV + MediaPipe Face Detection | Free, open source, runs on CPU for MVP volumes | $0 |
-| Arabic text shaping for captions | HarfBuzz + fribidi (called from the FFmpeg/Python render step) | Free, open source — this is the piece most competitors get wrong for Arabic | $0 |
-| Background jobs / GPU render bursts | Modal.com or RunPod serverless (pay-per-second GPU) | No idle cost — you only pay while a video is actually rendering; both offer free starter credits | Near-$0 at MVP scale, scales linearly |
-| Payments | Stripe (international) + Paymob or Fawry (Egypt/MENA local rails) | Stripe free until you take payments; Paymob/Fawry take a per-transaction cut, no fixed fee | Transaction-based only |
-| Monitoring/error tracking | Sentry free tier | Enough for MVP | $0 |
-| Email/notifications | Resend or Supabase's built-in email | Free tier sufficient at low volume | $0 |
+| Layer                                       | MVP choice                                                                                                            | Why                                                                                                                                               | Cost at low volume                    |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| Frontend                                    | Next.js (App Router) + Tailwind, RTL-first layout                                                                     | Free hosting on Vercel/Netlify free tier, huge ecosystem, easy RTL support                                                                        | $0                                    |
+| Auth + DB + object storage                  | Supabase (Postgres + Auth + Storage)                                                                                  | One free tier covers all three; generous limits for MVP                                                                                           | $0 (free tier)                        |
+| Video/audio object storage (large files)    | Cloudflare R2                                                                                                         | 10GB free, no egress fees (huge saving vs. S3)                                                                                                    | $0–5/mo                               |
+| Speech-to-text (Arabic)                     | Groq-hosted Whisper large-v3 (or Turbo)                                                                               | Free tier: ~2,000 requests/day; paid tier ~$0.04/hour of audio if you outgrow free tier — dramatically cheaper than OpenAI's own Whisper endpoint | ~$0 to start                          |
+| LLM (hook scoring, titles, captions polish) | Groq (Llama models, free tier) or a cheap provider (e.g., DeepSeek/Gemini Flash tier) for the heavier reasoning steps | Free/very cheap tiers with generous daily quotas                                                                                                  | ~$0–20/mo                             |
+| Video processing (cut, crop, encode)        | FFmpeg (self-run in a worker)                                                                                         | Free, open source, industry standard                                                                                                              | $0 (compute only)                     |
+| Face tracking / auto-reframe                | OpenCV + MediaPipe Face Detection                                                                                     | Free, open source, runs on CPU for MVP volumes                                                                                                    | $0                                    |
+| Arabic text shaping for captions            | HarfBuzz + fribidi (called from the FFmpeg/Python render step)                                                        | Free, open source — this is the piece most competitors get wrong for Arabic                                                                       | $0                                    |
+| Background jobs / GPU render bursts         | Modal.com or RunPod serverless (pay-per-second GPU)                                                                   | No idle cost — you only pay while a video is actually rendering; both offer free starter credits                                                  | Near-$0 at MVP scale, scales linearly |
+| Payments                                    | Stripe (international) + Paymob or Fawry (Egypt/MENA local rails)                                                     | Stripe free until you take payments; Paymob/Fawry take a per-transaction cut, no fixed fee                                                        | Transaction-based only                |
+| Monitoring/error tracking                   | Sentry free tier                                                                                                      | Enough for MVP                                                                                                                                    | $0                                    |
+| Email/notifications                         | Resend or Supabase's built-in email                                                                                   | Free tier sufficient at low volume                                                                                                                | $0                                    |
 
 **Estimated MVP fixed monthly cost: $0–30/month** for the first few hundred users, assuming you stay inside free tiers and pay only for occasional GPU render bursts and Whisper minutes beyond the free quota.
 
@@ -108,6 +114,7 @@ Ingest → Transcribe (Arabic) → LLM hook scoring → Auto-reframe & cut → B
 6. **Export/delivery:** final MP4 stored in R2, signed download URL served to the user; Phase 2 adds direct publish via TikTok/Instagram/YouTube's official content APIs.
 
 ### 4.4 Data model (minimal MVP schema)
+
 - `users` (auth, plan tier, locale/dialect preference)
 - `projects` (source video metadata, status)
 - `transcripts` (word-level timestamps + speaker labels)
@@ -117,26 +124,28 @@ Ingest → Transcribe (Arabic) → LLM hook scoring → Auto-reframe & cut → B
 
 ### 4.5 Scaling path — how the same architecture grows with you
 
-| Trigger | What changes | Why it's easy |
-|---|---|---|
-| Free-tier ASR quota exceeded | Switch to paid Groq tier or add Deepgram/ElevenLabs as a second provider behind the same internal "transcribe()" interface | Because transcription is an isolated service call, swapping providers is a config change, not a rewrite |
-| CPU-based face tracking too slow at volume | Move rendering workers to GPU-backed serverless (Modal/RunPod) full time instead of ad hoc | Same worker code, just a different execution target |
-| LLM prompt-based scoring plateaus in quality | Fine-tune a smaller open model (e.g., a Llama variant) on your own labeled "good clip / bad clip" data collected from user picks | You'll have accumulated exactly the training data you need from MVP usage logs |
-| Free-tier database/storage limits hit | Upgrade Supabase plan or migrate Postgres to a managed provider (still Postgres — no schema rewrite) | Standard Postgres underneath the whole time |
-| Need real-time/streaming clipping (live streams) | Add a streaming ASR path (Groq/Deepgram streaming) and a hot-clip detection service in parallel with the batch pipeline | Batch and streaming can coexist; you're adding a path, not replacing one |
-| Direct social publishing needed | Integrate TikTok Content Posting API, Instagram Graph API, YouTube Data API | Additive service, doesn't touch core pipeline |
+| Trigger                                          | What changes                                                                                                                     | Why it's easy                                                                                           |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Free-tier ASR quota exceeded                     | Switch to paid Groq tier or add Deepgram/ElevenLabs as a second provider behind the same internal "transcribe()" interface       | Because transcription is an isolated service call, swapping providers is a config change, not a rewrite |
+| CPU-based face tracking too slow at volume       | Move rendering workers to GPU-backed serverless (Modal/RunPod) full time instead of ad hoc                                       | Same worker code, just a different execution target                                                     |
+| LLM prompt-based scoring plateaus in quality     | Fine-tune a smaller open model (e.g., a Llama variant) on your own labeled "good clip / bad clip" data collected from user picks | You'll have accumulated exactly the training data you need from MVP usage logs                          |
+| Free-tier database/storage limits hit            | Upgrade Supabase plan or migrate Postgres to a managed provider (still Postgres — no schema rewrite)                             | Standard Postgres underneath the whole time                                                             |
+| Need real-time/streaming clipping (live streams) | Add a streaming ASR path (Groq/Deepgram streaming) and a hot-clip detection service in parallel with the batch pipeline          | Batch and streaming can coexist; you're adding a path, not replacing one                                |
+| Direct social publishing needed                  | Integrate TikTok Content Posting API, Instagram Graph API, YouTube Data API                                                      | Additive service, doesn't touch core pipeline                                                           |
 
 ---
 
 ## 5. Cost Model & Unit Economics
 
 ### 5.1 Approximate cost per minute of source video processed (MVP stack)
+
 - Transcription: ~$0.0006–0.04/hour of audio depending on Groq tier used → effectively fractions of a cent per minute
 - LLM scoring/titles: a few thousand tokens per video → typically under $0.01–0.05 per video on cheap providers
 - Rendering compute (GPU burst): a few cents per clip depending on length and resolution
 - **Realistic all-in cost per finished clip at MVP scale: well under $0.10**, meaning even a $5–10/month plan is comfortably profitable once you're past free-tier ceilings.
 
 ### 5.2 When costs actually start to matter
+
 At low volume (say, under 500 processed videos/month), you can likely run this **entirely inside free tiers** except for occasional overage. The point where you need to budget seriously is when you cross into thousands of videos/month — at which point your paying user base should already be covering the (still very low, cents-per-clip) marginal cost.
 
 ---
@@ -145,12 +154,12 @@ At low volume (say, under 500 processed videos/month), you can likely run this *
 
 Freemium, metered by "processing minutes" (same mental model as OpusClip, which the market already understands), priced for MENA purchasing power in both USD and local currency:
 
-| Tier | Price | Included | Target user |
-|---|---|---|---|
-| Free | $0 | ~60 min/month, watermark, 3–7 day storage | Trial users, students |
-| Creator | ~$7–9/mo (or local equivalent via Paymob/Fawry) | ~150–200 min/month, no watermark, dialect selection, basic templates | Solo creators, podcasters |
-| Pro | ~$15–19/mo | More minutes, direct publish/scheduling, brand templates, priority render queue | Growing creators, small brands |
-| Business/Agency | Custom | Team seats, API access, white-label export, dedicated support | Agencies, media companies, mosques/da'wah organizations managing multiple channels |
+| Tier            | Price                                           | Included                                                                        | Target user                                                                        |
+| --------------- | ----------------------------------------------- | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| Free            | $0                                              | ~60 min/month, watermark, 3–7 day storage                                       | Trial users, students                                                              |
+| Creator         | ~$7–9/mo (or local equivalent via Paymob/Fawry) | ~150–200 min/month, no watermark, dialect selection, basic templates            | Solo creators, podcasters                                                          |
+| Pro             | ~$15–19/mo                                      | More minutes, direct publish/scheduling, brand templates, priority render queue | Growing creators, small brands                                                     |
+| Business/Agency | Custom                                          | Team seats, API access, white-label export, dedicated support                   | Agencies, media companies, mosques/da'wah organizations managing multiple channels |
 
 Pricing meaningfully below OpusClip/Vizard's USD pricing (which is expensive relative to regional income) is itself a competitive weapon in this market, not just a nice-to-have.
 
@@ -168,12 +177,12 @@ Pricing meaningfully below OpusClip/Vizard's USD pricing (which is expensive rel
 
 ## 8. 12-Month Roadmap
 
-| Phase | Timeframe | Milestone |
-|---|---|---|
-| 0 — Validate | Weeks 1–4 | Manual/semi-automated pipeline (even a script + Whisper + FFmpeg you run yourself for 10–20 pilot users) to prove people want Arabic-tuned clips before building the full app |
-| 1 — MVP | Months 1–3 | Self-serve web app on the free-tier stack above; core loop working end to end for MSA + 1–2 dialects |
-| 2 — Growth | Months 4–9 | Direct social publishing, team workspaces, MENA payment rails, dialect coverage expansion, first paid tiers live |
-| 3 — Scale | Months 10–12 | Fine-tuned scoring model from usage data, GPU infra fully provisioned, agency/API tier, possible fundraising conversation if metrics justify it |
+| Phase        | Timeframe    | Milestone                                                                                                                                                                     |
+| ------------ | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 0 — Validate | Weeks 1–4    | Manual/semi-automated pipeline (even a script + Whisper + FFmpeg you run yourself for 10–20 pilot users) to prove people want Arabic-tuned clips before building the full app |
+| 1 — MVP      | Months 1–3   | Self-serve web app on the free-tier stack above; core loop working end to end for MSA + 1–2 dialects                                                                          |
+| 2 — Growth   | Months 4–9   | Direct social publishing, team workspaces, MENA payment rails, dialect coverage expansion, first paid tiers live                                                              |
+| 3 — Scale    | Months 10–12 | Fine-tuned scoring model from usage data, GPU infra fully provisioned, agency/API tier, possible fundraising conversation if metrics justify it                               |
 
 ---
 
@@ -187,13 +196,13 @@ Pricing meaningfully below OpusClip/Vizard's USD pricing (which is expensive rel
 
 ## 10. Risks & Mitigations
 
-| Risk | Mitigation |
-|---|---|
-| Free-tier AI providers change pricing/limits (this happens often) | Keep every AI call behind an internal interface so swapping providers is a config change, not a rewrite; never hardcode a single vendor's SDK deep into business logic |
-| Arabic dialect transcription quality disappoints early users | Set expectations clearly per dialect at launch (e.g., "excellent for MSA and Egyptian, good for Gulf, improving for Levantine"); collect correction data from users to improve over time |
-| Copyright/rights issues from clipped content | Require user attestation of rights at upload; respond promptly to takedown requests; avoid processing content you have reason to believe is unauthorized |
-| Underestimating GPU/render costs at scale | Track cost-per-clip from day one in the usage ledger table so pricing tiers stay profitable as you grow |
-| Competitors add Arabic support | Your moat is depth (correct RTL shaping, dialect nuance, cultural context in scoring, MENA payments/pricing) — keep investing there rather than chasing feature parity on everything else |
+| Risk                                                              | Mitigation                                                                                                                                                                                |
+| ----------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Free-tier AI providers change pricing/limits (this happens often) | Keep every AI call behind an internal interface so swapping providers is a config change, not a rewrite; never hardcode a single vendor's SDK deep into business logic                    |
+| Arabic dialect transcription quality disappoints early users      | Set expectations clearly per dialect at launch (e.g., "excellent for MSA and Egyptian, good for Gulf, improving for Levantine"); collect correction data from users to improve over time  |
+| Copyright/rights issues from clipped content                      | Require user attestation of rights at upload; respond promptly to takedown requests; avoid processing content you have reason to believe is unauthorized                                  |
+| Underestimating GPU/render costs at scale                         | Track cost-per-clip from day one in the usage ledger table so pricing tiers stay profitable as you grow                                                                                   |
+| Competitors add Arabic support                                    | Your moat is depth (correct RTL shaping, dialect nuance, cultural context in scoring, MENA payments/pricing) — keep investing there rather than chasing feature parity on everything else |
 
 ---
 
@@ -208,4 +217,4 @@ Pricing meaningfully below OpusClip/Vizard's USD pricing (which is expensive rel
 
 ---
 
-*This plan is a starting framework — validate the manual/semi-automated version (Phase 0) with real Arabic creators before writing a line of app code. The biggest risk here isn't the tech stack, it's whether dialect-aware clipping is a strong enough wedge to win users away from tools they already know. Test that first, cheaply.*
+_This plan is a starting framework — validate the manual/semi-automated version (Phase 0) with real Arabic creators before writing a line of app code. The biggest risk here isn't the tech stack, it's whether dialect-aware clipping is a strong enough wedge to win users away from tools they already know. Test that first, cheaply._

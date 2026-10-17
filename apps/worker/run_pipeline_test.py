@@ -20,7 +20,10 @@ from app.pipeline.orchestrator import run_pipeline
 
 # Point this at a real, short test video (reuse one from your earlier
 # standalone testing -- 20-60 seconds is plenty for this smoke test).
-SOURCE_VIDEO_PATH = r"C:\Users\aayasser\Desktop\PLAYGROUND\zatoona\playground\tests\media\sample_quran_verse.mp4"
+
+
+
+SOURCE_VIDEO_PATH = r"E:\Work\Projects\zatoona\playground\tests\media\test_1.mp4"
 
 
 def main():
@@ -28,7 +31,6 @@ def main():
     print(f"Created job: {job_id}")
 
     run_pipeline(job_id, SOURCE_VIDEO_PATH)  # runs synchronously, in this process
-
     job = jobs.get_job(job_id)
     print("\n" + "=" * 60)
     print(f"Final status: {job['status']}")

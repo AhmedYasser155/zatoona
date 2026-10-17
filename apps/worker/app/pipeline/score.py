@@ -14,7 +14,7 @@ from pathlib import Path
 
 from groq import Groq
 
-MODEL = "llama-3.3-70b-versatile"
+MODEL = "openai/gpt-oss-120b"
 
 # The prompt asks the LLM for 15-90s clips, but that's just a text
 # instruction with nothing stopping it from returning something

@@ -14,9 +14,6 @@ import subprocess
 import tempfile
 
 from groq import Groq
-from dotenv import load_dotenv
-
-load_dotenv()
 
 MAX_UPLOAD_BYTES = 24 * 1024 * 1024
 CHUNK_DURATION_SEC = 600
@@ -55,7 +52,6 @@ def _split_into_chunks(path: str, chunk_duration_sec: int, tmp_dir: str) -> list
 
 def _transcribe_file(audio_path: str) -> dict:
     """Transcribes a single file (must already be under Groq's size limit)."""
-    print(f"Transcribing {audio_path}...")
     client = Groq()
     with open(audio_path, "rb") as f:
         transcription = client.audio.transcriptions.create(

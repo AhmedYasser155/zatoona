@@ -27,7 +27,7 @@ from groq import Groq
 
 from app.pipeline import quran_reference
 
-MODEL = "llama-3.3-70b-versatile"
+MODEL = "openai/gpt-oss-120b"  # fast, cheap, context window is plenty for a single transcript
 PROMPT_PATH = Path(__file__).resolve().parents[4] / "packages" / "prompts" / "arabic" / "refine_transcript.md"
 
 

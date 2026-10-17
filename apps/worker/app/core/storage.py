@@ -17,10 +17,6 @@ import boto3
 
 from app.core.config import settings
 
-# load the .env file in the root of the project to get R2 credentials
-
-from dotenv import load_dotenv
-load_dotenv()
 
 def get_r2_client():
     return boto3.client(

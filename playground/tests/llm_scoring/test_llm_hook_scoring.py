@@ -35,7 +35,7 @@ TRANSCRIPT_JSON_PATH = r"C:\Users\aayasser\Desktop\PLAYGROUND\khulasa\playground
 # llama-3.3-70b-versatile is Groq's strong general-purpose free-tier model.
 # Worth also trying "allam-2-7b-instruct" (SDAIA's Arabic-specialized model,
 # also free on Groq) as a comparison -- swap MODEL below to test that.
-MODEL = "llama-3.3-70b-versatile"
+MODEL = "openai/gpt-oss-120b"
 
 SYSTEM_PROMPT = """أنت خبير في تحليل النصوص المفرغة من الفيديوهات العربية لاختيار
 أفضل المقاطع القصيرة القابلة للانتشار (15-90 ثانية لكل مقطع).
